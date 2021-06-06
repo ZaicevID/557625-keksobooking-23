@@ -50,6 +50,18 @@ function getRandomPositiveInteger (a, b) {
 };
 
 
+//переменные для createLocation
+const MIN_LAT = 35.65000;
+const MAX_LAT = 35.70000;
+const DIGITS = 5;
+const MIN_ING = 139.70000;
+const MAX_ING = 139.80000;
+
+//переменные для createAuthor
+const MIN_IMG = 1;
+const MAX_IMG = 8;
+
+//переменные для createOffer
 const TYPES = [
   'palace',
   'flat',
@@ -79,40 +91,77 @@ const FEATURES = [
   'conditioner'
 ];
 
-let seller = {
-  avatar: 'img/avatars/user0' + getRandomPositiveInteger(1, 8) + '.png'
-};
+const MAX_FEATURES_ELEMENT = 0;
+const MIN_FEATURES_ELEMENT = FEATURES.length;
 
-let coordinates = {
-  lat: getRandomPositiveFloat(35.65000, 35.70000, 5),
-  lng: getRandomPositiveFloat(139.70000, 139.80000, 5)
-};
+const PHOTOS = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+];
 
-let prices = getRandomPositiveInteger(100000, 1000000);
+const MAX_PHOTOS_ELEMENT = 0;
+const MIN_PHOTOS_ELEMENT = PHOTOS.length;
 
-let product = {
-  title: 'Предложение' + ' ' +getRandomPositiveInteger(1, 10),
-  address: coordinates.lat + ' ' + coordinates.lng,
-  price: getRandomPositiveInteger(100000, 1000000),
-  type: TYPES[getRandomPositiveInteger(0, TYPES.length - 1)],
-  rooms: getRandomPositiveInteger(1, 5),
-  guests: getRandomPositiveInteger(5, 10),
-  checkin: CHECKIN[getRandomPositiveInteger(0, CHECKIN.length - 1)],
-  checkout: CHECKOUT[getRandomPositiveInteger(0, CHECKOUT.length - 1)],
-  features: 'не понимаю',
-  description: 'Описание' + ' ' + getRandomPositiveInteger(1, 10),
-  photos: 'не понимаю'
-};
+const MIN_TITLE = 1;
+const MAX_TITLE = 10;
 
-const createOffer = () => {
+const MIN_PRICE = 5000;
+const MAX_PRICE = 10000;
+
+const MIN_TYPE = 0;
+const MAX_TYPE = TYPES.length - 1;
+
+const MIN_ROOMS = 1;
+const MAX_ROOMS = 5;
+
+const MIN_GUESTS = 5;
+const MAX_GUESTS = 10;
+
+const MIN_CHECKIN = 0;
+const MAX_CHECKIN = CHECKIN.length - 1;
+
+const MIN_CHECKOUT = 0;
+const MAX_CHECKOUT = CHECKOUT.length - 1;
+
+const MIN_DESCRIPTION = 1;
+const MAX_DESCRIPTION = 10;
+
+const createMock = () => {
+
+  const createAuthor = () => ({
+    avatar: 'img/avatars/user0' + getRandomPositiveInteger(MIN_IMG, MAX_IMG) + '.png'
+  });
+
+  const createOffer = () => ({
+    title: 'Предложение' + ' ' +getRandomPositiveInteger(MIN_TITLE, MAX_TITLE),
+    address: createLocation.lat + ' ' + createLocation.lng,
+    price: getRandomPositiveInteger(MIN_PRICE, MAX_PRICE),
+    type: TYPES[getRandomPositiveInteger(MIN_TYPE, MAX_TYPE)],
+    rooms: getRandomPositiveInteger(MIN_ROOMS, MAX_ROOMS),
+    guests: getRandomPositiveInteger(MIN_GUESTS, MAX_GUESTS),
+    checkin: CHECKIN[getRandomPositiveInteger(MIN_CHECKIN, MAX_CHECKIN)],
+    checkout: CHECKOUT[getRandomPositiveInteger(MIN_CHECKOUT, MAX_CHECKOUT)],
+    features: FEATURES.slice(getRandomPositiveInteger(MAX_FEATURES_ELEMENT, MIN_FEATURES_ELEMENT)),
+    description: 'Описание' + ' ' + getRandomPositiveInteger(MIN_DESCRIPTION, MAX_DESCRIPTION),
+    photos: PHOTOS.slice(getRandomPositiveInteger(MAX_PHOTOS_ELEMENT, MIN_PHOTOS_ELEMENT)),
+  });
+
+  const createLocation = () => ({
+    lat: getRandomPositiveFloat(MIN_LAT, MAX_LAT, DIGITS),
+    lng: getRandomPositiveFloat(MIN_ING, MAX_ING, DIGITS)
+  });
+
   return {
-    author: seller,
-    offer: product,
-    location: coordinates
+    author: createAuthor(),
+    offer: createOffer(),
+    location: createLocation()
   };
 };
 
-const newOffer = new Array(10).fill(null).map(() => createOffer());
+const newOffer = new Array(10).fill(null).map(() => createMock());
+
+
 
 
 
