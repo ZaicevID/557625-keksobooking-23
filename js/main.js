@@ -135,7 +135,7 @@ const createMock = () => {
 
   const createOffer = () => ({
     title: 'Предложение' + ' ' +getRandomPositiveInteger(MIN_TITLE, MAX_TITLE),
-    address: createLocation.lat + ' ' + createLocation.lng,
+    address: createLocation().lat + ' ' + createLocation().lng,
     price: getRandomPositiveInteger(MIN_PRICE, MAX_PRICE),
     type: TYPES[getRandomPositiveInteger(MIN_TYPE, MAX_TYPE)],
     rooms: getRandomPositiveInteger(MIN_ROOMS, MAX_ROOMS),
