@@ -77,15 +77,19 @@ const MAX_CHECKOUT = CHECKOUT.length - 1;
 const MIN_DESCRIPTION = 1;
 const MAX_DESCRIPTION = 10;
 
+
 const createMock = () => {
 
   const createAuthor = () => ({
     avatar: 'img/avatars/user0' + getRandomPositiveInteger(MIN_IMG, MAX_IMG) + '.png'
   });
 
+  const coordinateX = getRandomPositiveFloat(MIN_LAT, MAX_LAT, DIGITS);
+  const coordinateY = getRandomPositiveFloat(MIN_ING, MAX_ING, DIGITS);
+
   const createLocation = () => ({
-    lat: getRandomPositiveFloat(MIN_LAT, MAX_LAT, DIGITS),
-    lng: getRandomPositiveFloat(MIN_ING, MAX_ING, DIGITS)
+    lat: coordinateX,
+    lng: coordinateY
   });
 
   const createOffer = () => ({
