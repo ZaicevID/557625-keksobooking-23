@@ -113,6 +113,10 @@ const createMock = () => {
   };
 };
 
-export {createMock};
+const NUMBER_OF_NEW_ADS = 10;
+
+const newOffer = () => new Array(NUMBER_OF_NEW_ADS).fill(null).map(() => createMock());
+
+export {newOffer};
 
 

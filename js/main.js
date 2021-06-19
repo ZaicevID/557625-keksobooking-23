@@ -1,10 +1,4 @@
-import {createMock} from './data.js';
-
-const newOffer = new Array(10).fill(null).map(() => createMock());
-
-console.log(newOffer);
-
-
-
+import {newOffer} from './data.js';
+import {newOffers} from './creating-an-object.js';
 
 
