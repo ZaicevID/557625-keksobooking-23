@@ -17,19 +17,19 @@ const TYPES = [
   'flat',
   'house',
   'bungalow',
-  'hotel'
+  'hotel',
 ];
 
 const CHECKIN = [
   '12:00',
   '13:00',
-  '14:00'
+  '14:00',
 ];
 
 const CHECKOUT = [
   '12:00',
   '13:00',
-  '14:00'
+  '14:00',
 ];
 
 const FEATURES = [
@@ -38,7 +38,7 @@ const FEATURES = [
   'parking',
   'washer',
   'elevator',
-  'conditioner'
+  'conditioner',
 ];
 
 const MAX_FEATURES_ELEMENT = 0;
@@ -47,7 +47,7 @@ const MIN_FEATURES_ELEMENT = FEATURES.length;
 const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
 const MAX_PHOTOS_ELEMENT = 0;
@@ -81,7 +81,7 @@ const MAX_DESCRIPTION = 10;
 const createMock = () => {
 
   const createAuthor = () => ({
-    avatar: 'img/avatars/user0' + getRandomPositiveInteger(MIN_IMG, MAX_IMG) + '.png'
+    avatar: 'img/avatars/user0' + getRandomPositiveInteger(MIN_IMG, MAX_IMG) + '.png',
   });
 
   const coordinateX = getRandomPositiveFloat(MIN_LAT, MAX_LAT, DIGITS);
@@ -89,11 +89,11 @@ const createMock = () => {
 
   const createLocation = () => ({
     lat: coordinateX,
-    lng: coordinateY
+    lng: coordinateY,
   });
 
   const createOffer = () => ({
-    title: 'Предложение' + ' ' +getRandomPositiveInteger(MIN_TITLE, MAX_TITLE),
+    title: 'Предложение' + ' ' + getRandomPositiveInteger(MIN_TITLE, MAX_TITLE),
     address: createLocation().lat + ' ' + createLocation().lng,
     price: getRandomPositiveInteger(MIN_PRICE, MAX_PRICE),
     type: TYPES[getRandomPositiveInteger(MIN_TYPE, MAX_TYPE)],
@@ -109,7 +109,7 @@ const createMock = () => {
   return {
     author: createAuthor(),
     offer: createOffer(),
-    location: createLocation()
+    location: createLocation(),
   };
 };
 
