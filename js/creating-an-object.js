@@ -43,3 +43,4 @@ newOffers.forEach(({offer, author}) => {
 });
 
 export {newOffers};
+

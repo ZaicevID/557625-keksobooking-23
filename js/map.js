@@ -1,4 +1,11 @@
-const decontamination = function() {
+import {newOffer} from './data.js';
+import {newOffers} from './creating-an-object.js';
+
+const offer = newOffer();
+const address = document.querySelector('#address');
+const resetButton = document.querySelector('.ad-form__reset');
+
+const addMap = function() {
 
   const form = document.querySelector('.ad-form');
   const formFieldset = form.querySelectorAll('fieldset');
@@ -44,10 +51,99 @@ const decontamination = function() {
 
 
   form.classList.add('ad-form--disabled');
-  //form.classList.remove('ad-form--disabled');
 
-  };
+  const map = L.map('map-canvas')
+  .on('load', () => {
+    form.classList.remove('ad-form--disabled');
+    activateInputForm();
+    activateFilterForm();
+    console.log('Карта инициализирована');
+  })
+  .setView({
+    lat: 35.68167,
+    lng: 139.75386,
+  }, 13);
 
-  decontamination();
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(map);
 
-export {decontamination};
+  const mainPinIcon = L.icon({
+    iconUrl: '/img/main-pin.svg',
+    iconSize: [52, 52],
+    iconAnchor: [26, 52],
+  });
+
+  const mainPinMarker = L.marker(
+    {
+      lat: 35.68167,
+      lng: 139.75386,
+    },
+    {
+      draggable: true,
+      icon: mainPinIcon,
+    },
+  );
+  mainPinMarker.addTo(map);
+
+  resetButton.addEventListener('click', () => {
+    mainPinMarker.setLatLng({
+      lat: 35.68167,
+      lng: 139.75386,
+    });
+
+    map.setView({
+      lat: 35.68167,
+      lng: 139.75386,
+    }, 13);
+    address.setAttribute('placeholder', '35.68167, 139.75386');
+  });
+
+
+  const markerGroup = L.layerGroup().addTo(map);
+
+  const createMarker = (point) => {
+    const {lat, lng} = point;
+
+    const icon = L.icon({
+      iconUrl: '../img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
+
+    const marker = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        icon,
+      },
+    );
+
+      marker
+      .addTo(markerGroup)
+      .bindPopup(
+        newOffers(point),
+        {
+          keepInView: true,
+        },
+      );
+    };
+
+    offer.forEach((point) => {
+      createMarker(point)
+    });
+
+    mainPinMarker.on('moveend', (evt) => {
+      address.setAttribute('placeholder', evt.target.getLatLng());
+    });
+
+};
+
+addMap();
+
+export {addMap};
